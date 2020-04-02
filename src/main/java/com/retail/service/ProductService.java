@@ -2,6 +2,7 @@ package com.retail.service;
 
 import java.util.Arrays;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.HttpEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.DBObject;
 import com.retail.beans.Product;
@@ -70,9 +72,10 @@ public class ProductService {
 	}
 
 	@PutMapping(value = "/products", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public void setProductInformation(
+	public String setProductInformation(
 			@RequestBody ProductInformation productInformation) {
 		productRepo.save(productInformation);
+		return "Product Updated Successfully";
 	}
 
 	public DBObject getProductInformation(Integer id) {
